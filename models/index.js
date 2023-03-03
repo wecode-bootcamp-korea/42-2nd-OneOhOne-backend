@@ -11,4 +11,4 @@ const appDataSource = new DataSource({
 
 });
 
-module.exports = {appDataSource}; 
+module.exports = { appDataSource }; 
