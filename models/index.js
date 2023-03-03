@@ -7,8 +7,6 @@ const appDataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
   database: process.env.DB_DATABASE,
-
-
 });
 
-module.exports = { appDataSource }; 
+module.exports = { appDataSource };

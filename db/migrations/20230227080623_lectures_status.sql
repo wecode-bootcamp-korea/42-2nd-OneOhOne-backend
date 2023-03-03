@@ -1,10 +1,10 @@
 -- migrate:up
-CREATE TABLE lecutre_status(
+CREATE TABLE lecture_status(
   id INT NOT NULL AUTO_INCREMENT,
   status VARCHAR(100) NOT NULL,
   PRIMARY KEY(id)
 );
 
 -- migrate:down
-DROP TABLE lecutre_status;
+DROP TABLE lecture_status;
 

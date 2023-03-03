@@ -13,7 +13,7 @@ CREATE TABLE lectures(
   PRIMARY KEY (id),
   CONSTRAINT lectures_creator_id_fkey FOREIGN KEY (creator_id)  REFERENCES creators (id),
   CONSTRAINT lectures_category_id_fkey FOREIGN KEY (category_id) REFERENCES categories (id),
-  CONSTRAINT lecutres_lecture_status_id_fkey FOREIGN KEY (status_id) REFERENCES lecutre_status (id)
+  CONSTRAINT lectures_lecture_status_id_fkey FOREIGN KEY (status_id) REFERENCES lecture_status (id)
 );
 
 -- migrate:down
