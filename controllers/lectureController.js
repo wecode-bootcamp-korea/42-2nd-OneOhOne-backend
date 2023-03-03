@@ -7,4 +7,10 @@ const getLectures = catchAsync(async (req, res) => {
   return res.status(200).json({ data: lists });
 });
 
-module.exports = { getLectures };
+const getLectureDetail = catchAsync(async (req, res) => {
+  const { lectureId } = req.params;
+  const data = await lectureService.getLectureDetail(lectureId);
+  return res.status(200).json({ data });
+});
+
+module.exports = { getLectures, getLectureDetail };
