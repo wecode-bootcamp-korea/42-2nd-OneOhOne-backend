@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const axios = require("axios");
 
 const userDao = require('../models/userDao');
 const validate = require('../utils/validators');
@@ -54,7 +55,37 @@ const signIn = async (email, password) => {
 
 };
 
+const kakaoSignin = async (kakaoToken) => {
+  const getKakaoToken = await axios.get("https://kapi.kakao.com/v2/user/me",{
+    headers: {
+      authorization: `Bearer ${kakaoToken}`,
+      "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    },
+  });
+
+  if(!getKakaoToken){
+    const error = new Error("KAKAO_TOKEN_ERROR");
+    error.statusCode = 400;
+    
+    const { data } = kakaoUser;
+    const kakaoid = data.id;
+    const name = data.profile.nickname;
+    const email = data.kakao_account.email;
+    const userId = await userDao.checkUserbyKakaoid(kakaoid);
+
+    if (!userId){ 
+      const newUser = await userDao.createUser(kakaoid, name, email);
+
+      return (accessToken = jwt.sign({ userId: newUser.insertId},process.env.SECRET_KEY));
+  }
+      return (accessToken = jwt.sign({userId: userId},process.env.SECRET_KEY));
+};
+};
+
+
+
 module.exports ={
   signUp,
-  signIn
+  signIn,
+  kakaoSignin
 };

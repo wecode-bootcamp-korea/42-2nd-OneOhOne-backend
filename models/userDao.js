@@ -40,8 +40,32 @@ const getuserByEmail = async (email) => {
   return user;
 };
 
+const checkUserbyKakaoid = async (kakaoId) => {
+  const result = await appDataSource.query(
+    `SELECT
+    u.kakao_id AS kakaoId
+    FROM users as u
+    WHERE u.kakao_id=?`,
+    [kakaoId]
+  );
+  return result;
+};
 
+const getUserByKakao = async(kakaoId) => {
+  const user = await appDataSource.query(
+    `SELECT
+    u.id,
+    u.name,
+    u.email
+    FROM users AS u
+    WHERE u.kakao_id=?`,
+    [kakaoId]
+  );
+  return user;
+  };
 module.exports = { 
   createUser,
-  getuserByEmail
+  getuserByEmail,
+  getUserByKakao,
+  checkUserbyKakaoid
 };
