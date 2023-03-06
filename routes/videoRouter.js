@@ -4,6 +4,7 @@ const videoController = require("../controllers/videoController");
 
 const router = express.Router();
 
-router.get("/video", videoController.)
+router.get("/:videoId", videoController.getVideo);
+router.get("/list/:lectureId",videoController.getLectureDetails);
 
 module.exports=  { router };
