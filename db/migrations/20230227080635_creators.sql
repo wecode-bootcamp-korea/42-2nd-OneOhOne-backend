@@ -1,9 +1,8 @@
 -- migrate:up
 CREATE TABLE creators(
   id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(200) NOT NULL,
   image_url VARCHAR(500) NULL,
-  description TEXT NOT NULL,
+  description TEXT NULL,
   PRIMARY KEY(id)
 );
 
