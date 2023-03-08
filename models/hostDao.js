@@ -95,6 +95,7 @@ const getUserInfo = async () => {
   const userInfo = await appDataSource.query(
     `
     SELECT
+      u.id AS userId
       u.kakao_id AS userKakaoId,
       u.name AS userName,
     FROM

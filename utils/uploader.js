@@ -11,16 +11,15 @@ AWS.config.update({
 });
 const s3 = new AWS.S3();
 
-const { upload } = multer({
+const uploader = multer({
   storage: multurS3({
     s3: s3,
     bucket: process.env.BUCKET,
-    acl: "public-read-write",
-    key: function (req, file, cb) {
-      cb(null, `${Date.now()}_${path.basename(file.originalname)}`);
-    },
+    //acl: "public-read-write",
+    key: "ssssss",
+    //function (req, file, cb) {cb(null, "ssssss");},
   }),
-  limits: { fileSize: 10 * 1024 * 1024 },
+  //limits: { fileSize: 10 * 1024 * 1024 },
 });
 
-module.exports = { upload };
+module.exports = { uploader };
