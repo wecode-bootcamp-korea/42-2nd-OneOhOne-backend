@@ -66,20 +66,23 @@ const kakaoSignin = async (kakaoToken) => {
   if(!getKakaoToken){
     const error = new Error("KAKAO_TOKEN_ERROR");
     error.statusCode = 400;
-    
-    const { data } = kakaoUser;
-    const kakaoid = data.id;
-    const name = data.profile.nickname;
-    const email = data.kakao_account.email;
-    const userId = await userDao.checkUserbyKakaoid(kakaoid);
 
-    if (!userId){ 
-      const newUser = await userDao.createUser(kakaoid, name, email);
-
-      return (accessToken = jwt.sign({ userId: newUser.insertId},process.env.SECRET_KEY));
+    throw error
   }
-      return (accessToken = jwt.sign({userId: userId},process.env.SECRET_KEY));
-};
+
+  const { data } = getKakaoToken;
+  const kakaoid = data.id;
+  const name = data.properties.nickname;
+  const email = data.kakao_account.email;
+  const userId = await userDao.checkUserbyKakaoid(kakaoid);
+
+  if (!userId){ 
+    const newUser = await userDao.createUser(kakaoid, name, email);
+
+    return jwt.sign({ userId: newUser.insertId},process.env.SECRET_KEY);
+  }
+
+  return jwt.sign({userId: userId},process.env.SECRET_KEY);
 };
 
 
