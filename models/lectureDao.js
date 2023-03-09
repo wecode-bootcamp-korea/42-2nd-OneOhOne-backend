@@ -2,7 +2,7 @@ const { appDataSource } = require("./index");
 
 const getLectures = async (category) => {
   try {
-    const whereClause = category ? `WHERE ca.name = "${category}"` : "";
+    const whereClause = category ? `WHERE l.category_name = "${category}"` : "";
     const data = await appDataSource.query(
       `SELECT
         l.id AS lectureId,
@@ -10,24 +10,15 @@ const getLectures = async (category) => {
         l.price AS lecturePrice,
         l.description AS lectureDescription,
         l.main_image_url AS lectureMainImageUrl,
-        cr.name AS creatorName,
-        ca.name AS categoryName,
-        ls.status AS lectureStatus,
+        u.name AS creatorName,
+        l.category_name AS categoryName,
         l.create_at AS lectureCreateAt
       FROM
         lectures l
       INNER JOIN
-        creators cr
+        users u
       ON
-        cr.id = l.creator_id
-      INNER JOIN
-        categories ca
-      ON
-        ca.id = l.category_id
-      INNER JOIN
-        lecture_status ls
-      ON
-        ls.id = l.status_id
+        u.id = l.user_id
       ${whereClause}
       ORDER BY
         l.id ASC`
@@ -49,10 +40,9 @@ const getLecture = async (lectureId) => {
         l.price AS lecturePrice,
         l.description AS lectureDescription,
         l.main_image_url AS lectureMainImageUrl,
-        cr.name AS creatorName,
+        u.name AS creatorName,
         cr.description AS creatorDescription,
-        ca.name AS categoryName,
-        ls.status AS lectureStatus 
+        l.category_name AS categoryName
       FROM
         lectures l
       INNER JOIN
@@ -60,13 +50,9 @@ const getLecture = async (lectureId) => {
       ON
         cr.id = l.creator_id
       INNER JOIN
-        categories ca
+        users u
       ON
-        ca.id = l.category_id
-      INNER JOIN
-        lecture_status ls
-      ON
-        ls.id = l.status_id
+        u.id = l.user_id
       WHERE l.id=?
   `,
       [lectureId]
