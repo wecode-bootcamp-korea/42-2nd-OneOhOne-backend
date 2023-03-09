@@ -1,13 +1,13 @@
 const { appDataSource } = require("./index");
 
-const createUser = async (email, password, name, kakaoid, phonenumber ) => {
+const createUser = async (email, name, kakaoid, password, phonenumber ) => {
   return appDataSource.query(
     `
     INSERT INTO users(
       email,
-      password,
       name,
       kakao_id,
+      password,
       phone_number,
       point
     ) VALUES (
@@ -19,7 +19,7 @@ const createUser = async (email, password, name, kakaoid, phonenumber ) => {
       1000000
     )
     `, 
-    [email, password, name, kakaoid, phonenumber]
+    [email, name, kakaoid, password,  phonenumber]
   );
 };
 
@@ -41,7 +41,7 @@ const getuserByEmail = async (email) => {
 };
 
 const checkUserbyKakaoid = async (kakaoId) => {
-  const result = await appDataSource.query(
+  const [result] = await appDataSource.query(
     `SELECT
     u.kakao_id AS kakaoId
     FROM users as u
@@ -56,7 +56,8 @@ const getUserByKakao = async(kakaoId) => {
     `SELECT
     u.id,
     u.name,
-    u.email
+    u.email,
+    u.password
     FROM users AS u
     WHERE u.kakao_id=?`,
     [kakaoId]

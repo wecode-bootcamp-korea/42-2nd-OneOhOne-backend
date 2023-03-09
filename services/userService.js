@@ -69,15 +69,16 @@ const kakaoSignin = async (kakaoToken) => {
 
     throw error
   }
-
-  const { data } = getKakaoToken;
+ 
+  const { data }  = getKakaoToken;
+  console.log(data)
   const kakaoid = data.id;
   const name = data.properties.nickname;
   const email = data.kakao_account.email;
   const userId = await userDao.checkUserbyKakaoid(kakaoid);
 
   if (!userId){ 
-    const newUser = await userDao.createUser(kakaoid, name, email);
+    const newUser = await userDao.createUser(email, name, kakaoid);
 
     return jwt.sign({ userId: newUser.insertId},process.env.SECRET_KEY);
   }
