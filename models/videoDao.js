@@ -8,8 +8,7 @@ const getVideo = async(videoId) => {
       v.time AS videoRuntime,
       v.video_url AS videoUrl,
      v.sequence AS videoSequence,
-     c.sequence AS curriculumSequence,
-      l.id AS lectureId
+     c.sequence AS curriculumSequence
     FROM 
       lectures l
       INNER JOIN 
@@ -20,7 +19,8 @@ const getVideo = async(videoId) => {
       videos v
     ON
       c.id = v.curriculum_id
-    WHERE v.id= 4
+    WHERE v.id= ?
+    
     ORDER BY 
       c.sequence`,
     [videoId]
@@ -67,6 +67,7 @@ const getLectureDetails = async (lectureId) => {
 
       appDataSource.query(`
         SELECT
+          l.id AS lectureId,
           l.name AS lectureName,
           c.sequence AS curriculumsSequence
         FROM 
@@ -77,16 +78,16 @@ const getLectureDetails = async (lectureId) => {
           l.id = c.lecture_id
         WHERE l.id = ?
         ORDER BY 
-          c.sequence
-      `, [lectureId])
+          c.sequence`, 
+          [lectureId])
     ]);
 
     return {
       
       lecture: {
+        id: lecture[0].lectureId,
         name: lecture[0].lectureName,
-        curriculumsSequence: lecture[0].curriculumsSequence,
-      },
+         },
       curriculums
     };
   } catch (err) {

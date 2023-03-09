@@ -2,7 +2,7 @@ const videoService = require("../services/videoService");
 const { catchAsync } = require("../utils/error");
 
 const getVideo = catchAsync(async (req, res) => {
-  const videoId = req.params;
+  const {videoId} = req.params;
   const data = await videoService.getVideo(videoId);
   return res.status(200).json({ data });
 });
