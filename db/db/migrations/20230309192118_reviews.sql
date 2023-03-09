@@ -12,6 +12,5 @@ CREATE TABLE reviews(
   CONSTRAINT reviews_user_id_fkey FOREIGN KEY (user_id)  REFERENCES users (id),
   CONSTRAINT reviews_lecture_id_fkey FOREIGN KEY (lecture_id) REFERENCES lectures (id)
 );
-
 -- migrate:down
 DROP TABLE reviews;

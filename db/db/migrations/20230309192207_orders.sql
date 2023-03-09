@@ -13,6 +13,5 @@ CREATE TABLE orders(
   CONSTRAINT orders_lecture_id_fkey FOREIGN KEY (lecture_id) REFERENCES lectures (id),
   CONSTRAINT orders_payment_types_id_fkey FOREIGN KEY (payment_types_id) REFERENCES payment_types (id)
 );
-
 -- migrate:down
 DROP TABLE orders;
