@@ -10,4 +10,4 @@ router.post("/signin", userController.signIn);
 router.post("/kakao",  userController.kakaoSignin);
 
 
-module.exports = { router }; 
+module.exports = { router };
