@@ -9,6 +9,5 @@ CREATE TABLE carts(
   CONSTRAINT cart_lecture_id_fkey FOREIGN KEY (lecture_id) REFERENCES lectures (id),
   CONSTRAINT cart_user_id_fkey FOREIGN KEY (user_id) REFERENCES users (id)
 );
-
 -- migrate:down
 DROP TABLE carts;

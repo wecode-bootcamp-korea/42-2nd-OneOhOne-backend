@@ -1,7 +1,7 @@
 -- migrate:up
 CREATE TABLE curriculums(
   id INT NOT NULL AUTO_INCREMENT,
-  chapter_name VARCHAR(200) NOT NULL,
+  chapter_name VARCHAR(200) NULL,
   sequence int NULL,
   lecture_id INT NOT NULL,
   PRIMARY KEY (id),
