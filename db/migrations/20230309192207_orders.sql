@@ -2,9 +2,9 @@
 CREATE TABLE orders(
   id INT NOT NULL AUTO_INCREMENT,
   order_number VARCHAR(200),
-  user_id INT NOT NULL,
-  lecture_id INT NOT NULL,
-  payment_types_id INT NOT NULL,
+  user_id INT,
+  lecture_id INT,
+  payment_types_id INT,
   total_price DECIMAL (10,2),
   create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   update_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
