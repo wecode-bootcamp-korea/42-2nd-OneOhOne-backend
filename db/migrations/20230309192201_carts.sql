@@ -1,8 +1,8 @@
 -- migrate:up
 CREATE TABLE carts(
   id INT NOT NULL AUTO_INCREMENT,
-  user_id INT NOT NULL,
-  lecture_id INT NOT NULL,
+  user_id INT,
+  lecture_id INT,
   create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   update_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
