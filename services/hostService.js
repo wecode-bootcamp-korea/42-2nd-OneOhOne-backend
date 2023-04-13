@@ -3,14 +3,14 @@ const hostDao = require("../models/hostDao");
 const lectureInfo = async (
   lectureName,
   description,
-  categotyName,
+  categoryName,
   mainImageUrl,
   detailImageUrl
 ) => {
   return await hostDao.lectureInfo(
     lectureName,
     description,
-    categotyName,
+    categoryName,
     mainImageUrl,
     detailImageUrl
   );

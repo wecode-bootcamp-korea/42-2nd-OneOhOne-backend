@@ -3,7 +3,7 @@ const { appDataSource } = require("./index");
 const lectureInfo = async (
   lectureName,
   description,
-  categotyName,
+  categoryName,
   mainImageUrl,
   detailImageUrl
 ) => {
@@ -25,7 +25,7 @@ const lectureInfo = async (
           ?,?,?,?
         )
       `,
-      [mainImageUrl, lectureName, categotyName, description]
+      [mainImageUrl, lectureName, categoryName, description]
     );
     await queryRunner.query(
       `
