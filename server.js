@@ -11,11 +11,11 @@ const startServer = async () => {
     .initialize()
     .then(() => {
       app.listen(PORT, () => {
-        console.log(`server is listening on ${PORT}`);
+        console.log(`🆗server is listening on ${PORT}🆗`);
       });
     })
     .catch((err) => {
-      console.log(`Failed server connect`);
+      console.log(`❌Failed server connect❌`);
       appDataSource.destroy();
     });
 };
