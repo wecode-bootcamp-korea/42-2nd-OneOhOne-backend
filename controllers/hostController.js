@@ -2,14 +2,13 @@ const hostService = require("../services/hostService");
 const { catchAsync } = require("../utils/error");
 
 const lectureInfo = catchAsync(async (req, res) => {
-  const { lectureName, description } = req.body;
-  const { category } = req.params;
+  const { lectureName, description, categoryName } = req.body;
   const { mainImageUrl, detailImageUrl } = req.file;
 
   if (
     !lectureName ||
     !description ||
-    !category ||
+    !categoryName ||
     !mainImageUrl ||
     !detailImageUrl
   ) {
@@ -21,7 +20,7 @@ const lectureInfo = catchAsync(async (req, res) => {
   await hostService.lectureInfo(
     lectureName,
     description,
-    category,
+    categoryName,
     mainImageUrl,
     detailImageUrl
   );
